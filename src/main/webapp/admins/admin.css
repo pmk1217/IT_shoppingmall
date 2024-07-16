@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+  li{
+      list-style:none;
+   }
+	html, body {
+	   width: 90%;
+	   height : 80%;
+	   margin: 0 auto;
+	   }
+	a {
+		text-decoration:none;
+	}
+	table {
+		background-color: white;
+		border-collapse: collapse;
+		width: 800px;
+	}
+	th {
+		padding: 8px;
+		border-top :2px solid #ddd;
+		border-bottom :2px solid #ddd;
+		background-color: sky;
+		border-collapse: collapse;
+	}
+	td {
+		border-bottom :1px solid #ddd;
+		border-collapse: collapse;
+		padding: 8px;
+		text-align: center;
+		overflow: hidden; 
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.toptable tr {
+		height: 26px;
+
+	}
+	.toptable {
+		margin: 0 auto;
+		font-size: 10px;
+	}
+	.bottomtable {
+		font-size: 10px;
+	}
+	input {
+		background-color: white;
+		border-style: none;
+		border:1px solid gray;
+		border-radius: 3px;
+		font-size: 10px;
+		padding-bottom: 3px;
+		padding-top: 3px;
+		padding-left: 4px;
+		padding-right: 10px;
+	}
+	.search {
+		font-size: 10px;
+		margin: 0 auto;
+		border-style: none;
+	}
+	a:link {
+		color:black;
+	}
+	a:hover {
+		color:skyblue;
+	}
+	.btn {
+		cursor:pointer;
+		padding-bottom: 3px;
+		padding-top: 3px;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-weight: bold;
+	}
+	header {
+		margin: 0 auto; 
+		width:1000px; 
+		height:50px;
+	}
+	header h1 {
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+	 aside{
+	      float: left;
+	      width: 150px;
+	      margin-top: 0px;
+	      margin: 0 auto;
+	      margin-left: 0px;
+	      height: 700px;
+	      background-color: #535353;
+	   }
+	   aside li {
+	   	  font-size: 12px;
+	   	  padding-bottom: 10px;
+	   	  padding-top: 10px;
+	   	  color: white;
+	   	  font-weight: bold;
+	   	  font-size: 12px;
+	   }
+	   aside ul {
+			text-align: left;
+			margin-left: 0px;
+			padding-left: 0px;
+			color:white;
+	}
+	section {
+		width: 1000px;
+		height:700px;
+	}
+	.asidemenu:hover{
+		background-color: blue;
+	}
+	aside p {
+		text-align: center;
+		color: white;
+	}
+	footer {
+		height:60px;
+		background-color:#ddd;
+	}
+	footer p {
+		width:1000px;
+		margin:0 auto;
+		margin-top:0 auto;
+		text-align:center;
+		line-height: 60px;
+		font-size:14px;
+	}
+	#table {
+		width:400px;
+		margin: 0 auto;
+		font-size:12px;
+		border: 1px solid #ddd;
+	}

@@ -1,0 +1,138 @@
+CREATE DATABASE IT_shop;
+USE IT_shop;
+
+
+CREATE TABLE user (
+  user_id varchar(30), 
+	password varchar(64) not null,
+	name varchar(20) not null,
+  birthday date not null,
+  email varchar(30) not null,
+  address varchar(30) not null,
+  zipcode varchar(5) not null,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY ( user_id )
+);
+
+
+CREATE TABLE product (
+  product_id int auto_increment,
+	name varchar(150) not null,
+  price int(20) not null,
+  content varchar(200) not null,
+  img varchar(100) not null,
+  views int (5) default ('0'),
+  likes int (5) default ('0'),
+  quantity int (5) not null,
+  category varchar(20) not null,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY ( product_id )
+);
+
+
+CREATE TABLE cart (
+	cart_id int auto_increment,
+	c_userId varchar(30) references user(user_id),
+	c_productId int(5) references product(product_id),
+  quantity int(5),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY ( cart_id )
+);
+
+CREATE TABLE orderList (
+  order_id int auto_increment,
+	o_userId varchar(30) references user(user_id),
+  o_productId int(5) references product(product_id),
+  quantity int(5),
+  orderProcess ENUM('0', '1', '2') DEFAULT '0',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY ( order_id )
+);
+
+CREATE TABLE manager (
+  manager_id varchar(30), 
+	password varchar(30) not null,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY ( manager_id )
+);
+
+CREATE TABLE zipcode (
+  zipcode_id int auto_increment, 
+	zipcode varchar(5),
+  cityName varchar(30) not null,
+  regionName varchar(20) not null,
+  streetName varchar(30) not null,
+	PRIMARY KEY ( zipcode_id )
+);
+
+CREATE TABLE user_product_likes (
+    user_id varchar(30),
+    product_id int,
+    PRIMARY KEY (user_id, product_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+
+insert Product(name, price, content, img, quantity, category) values ('프리미엄 조립PC_P1480 (14600KF/4070TiS)', 2458000, '코어i5-14600KF / 인텔 B760 / 유선랜 / DDR5 32GB / 지포스 RTX4070 Ti SUPER', 'desktop1.jpg', 100, 'desktop');
+insert Product(name, price, content, img, quantity, category) values ('프리미엄 조립PC_P1503 (7800X3D/4080S)', 3117000, '라이젠7 7800X3D (라파엘) / AMD B650 / 유선랜 / 무선랜 / 블루투스 / DDR5 32GB', 'desktop2.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('조립PC_R51268 (5600/4060)', 892000, '라이젠5 5600 / AMD A520 / 유선랜 / DDR4 16GB / 지포스 RTX4060 / 500GB NVMe SSD', 'desktop3.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('삼성 DM500TFA-A58A 데스크탑 인텔 13세대 i5', 948000, '데스크탑5 / 랩터레이크 / 인텔 코어 i5 / ~8GB RAM / ~256GB SSD / 내장그래픽 ', 'desktop4.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('파빌리온 데스크탑 TP01-3003KL i5-12400 (8GB/256GB/FD)', 599000, '인텔 / 코어i5-12세대 / 엘더레이크 / i5-12400 (2.5GHz) / DDR4 / 8GB / M.2 / 256GB / UHD 그래픽스 730 / 5.1채널', 'desktop5.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('게이밍 추천 조립PC_R51235 (7600/4060Ti)', 1369000, '라이젠5 7600 / AMD B650 / 유선랜 / DDR5 32GB / 지포스 RTX4060 Ti / 1TB NVMe SSD / 공랭 1열 쿨러', 'desktop6.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('사무용 추천 조립PC_i51247 (12400/내장그래픽)', 415000, '코어i5-12400 (엘더레이크)/ 인텔 H610 / 유선랜 / DDR4 8GB / 내장그래픽 / 256GB SSD / 미니타워 / 블랙 / 정격 500W / 기본 쿨러', 'desktop7.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('인스피론 3030SFF DN3030S-UB03KR', 799000, '14세대 i5-14400 / DDR5 16GB / NVMe 512GB / UHD730 / Ubuntu(FreeDos) / DisplayPort / HDMI / USB3.2 / USB2.0', 'desktop8.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('레노버 ThinkStation P5 TWR 30GAS02000 Xeon W3-2425', 3399000, 'Lenovo / 레노버 / Thinkstation / 씽크스테이션 / P5 / 워크스테이션 / 웍 / 인텔 제온', 'desktop9.jpg', 100,'desktop');
+insert Product(name, price, content, img, quantity, category) values ('아이웍스3-3018 ', 375000, '아이웍스3 / 라이젠5 4650G (르누아르) / AMD A520 / 16GB RAM / 내장그래픽 / 512GB NVMe SSD / 정격 500W', 'desktop10.jpg', 100,'desktop');
+
+insert Product(name, price, content, img, quantity, category) values ('무선.블루투스 다크필드마우스, MX Anywhere 3 (MX 애니웨어 3) [로지텍코리아정품] [그래파이트]', 79000 , '블루투스 5.0 / 7버튼+1휠 / 4000dpi / 다크필드 / 감도(dpi)변환 / 멀티페어링 / 매크로', 'mouse1.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('유.무선 게이밍 HERO마우스, G PRO Wireless LoL 리그오브레전드 에디션 [로지텍코리아정품] [블루/USB]', 89000, '8버튼+1휠 / 25600dpi / HERO 25K / 감도(dpi)변환 / 전용소프트웨어 / 사이드버튼 커스터마이징', 'mouse2.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 유선 광마우스, SPA-JMA1PUB [블랙/USB]', 9000, '2버튼+1휠 / 1000dpi / 양손용 / 저소음', 'mouse3.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 블루투스 광마우스, SMB-1000BS [블랙]', 27900, '블루투스 3.0 / 2버튼+1휠 / 1000dpi / 양손용', 'mouse4.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[RAZER] 무선 게이밍 광마우스 Cobra Pro PKG 무선 마우스+충전독 [블랙]', 249000, '유/무선/블루투스 마우스 / 광 / 30000dpi / Razer FOCUS Pro 30K 옵티컬 / 감도(dpi)변환 / 매크로 / 내장형메모리', 'mouse5.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 무선 광마우스, SM-R1200 [앨리스블루 SM-R1200AB]', 15900, '광 / DPI+3버튼 / 연결 방식: 무선 / 전용동글(리시버) / USB / AAA형 2개 / 상하 / 1600DPI', 'mouse6.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[프나틱 기어] 무선 게이밍 마우스, LAMZU THORN 4K Edition [람주 트론 4K 에디션] [주황]', 133000, '유/무선마우스 / 광 / 4버튼+1휠 / 26000dpi / PIXART PAW3395 / 전용소프트웨어', 'mouse7.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('블루투스 광마우스, Bluetooth Ergonomic Mouse (블루투스 에고노믹 마우스) [MS코리아정품] [블루]', 59900, '블루투스 5.0 / 5버튼+1휠 / 1600dpi / 멀티페어링 / 전용소프트웨어', 'mouse8.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[맥스틸] 무선.블루투스 광마우스, GM-BWN200L 무소음 [블랙]', 4900, '블루투스 5.0 / 3버튼+1휠 / 1600dpi / 감도(dpi)변환 / 양손용 / 무소음 / AA건전지 교체형', 'mouse9.jpg', 100, 'mouse');
+insert Product(name, price, content, img, quantity, category) values ('[플레오맥스] 유선 광마우스, PLEOMAX MO-G3000 [블루/USB]', 3300, '3버튼1휠 / 2400dpi / 감도dpi변환 / 양손용 / 다색 LED', 'mouse10.jpg', 100, 'mouse');
+
+
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 오디세이 게이밍 모니터 G3 S27AG300', 259000 , '68.6cm(27인치) / 와이드(16:9) / 평면 / VA / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.3114mm', 'monitor1.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 삼성 베젤리스 커브드모니터 C27R502', 194000, '68.4cm(27인치) / 와이드(16:9) / 커브드 / 1800R / VA / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.311mm', 'monitor2.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[LG전자] LG 모니터 27ML600SW', 209000, '68.6cm(27인치) / 와이드(16:9) / 평면 / IPS / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.3114mm', 'monitor3.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[MSI] MP273AW IPS 100 아이에르고 화이트 무결점', 159000, '27인치/16:9/평면/IPS(광시야각)/100Hz/플리커프리/블루라이트차단/눈부심방지/안티글레어', 'monitor4.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 삼성 피봇 모니터 F27T450', 208000, '68.6cm(27인치) / 와이드(16:9) / 평면 / IPS / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.3114mm', 'monitor5.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[삼성전자] 삼성UHD모니터 U32J590', 345000, '80.1cm(32인치) / 와이드(16:9) / 평면 / VA / 광시야각 / 3840 x 2160(4K UHD) / 픽셀피치: 0.181mm', 'monitor6.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[대성글로벌코리아] ViewSync VSO273-75', 105000, '68.5cm(27인치) / 와이드(16:9) / 평면 / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.311mm', 'monitor7.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[한성컴퓨터] TFG32F16V 1500R 리얼165 게이밍 [무결점]', 239000, '80.1cm(32인치) / 와이드(16:9) / 커브드 / 1500R / VA / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.363mm', 'monitor8.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[픽셀아트] PIXELART PA272MF 아이케어 프리싱크 75', 109000, '68.58cm(27인치) / 와이드(16:9) / 평면 / IPS / 광시야각 / 1920 x 1080(FHD) / 픽셀피치: 0.3114mm', 'monitor9.jpg', 100, 'monitor');
+insert Product(name, price, content, img, quantity, category) values ('[제이씨현시스템] UDEA EDGE ED2731HQ 유케어 IPS 홈엔터 QHD 무결점', 189000, '68.6cm(27인치) / 와이드(16:9) / IPS / 평면 / 광시야각 / 2560 x 1440(QHD) / 픽셀피치: 0.2331mm', 'monitor10.jpg', 100, 'monitor');
+
+
+insert Product(name, price, content, img, quantity, category) values ('유선,블루투스 무접점 키보드,KN35BT DRT,45G', 185000, '키압:45G / 무접점(정전식) / Type-C 충전식(케이블포함) / 동시키입력 / 무한키입력 / 멀티미디어 / 윈도우잠금 / 플라스틱커버 / 브러쉬 / 래피드 트리거', 'keyboard1.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values (' 유,무선,블루투스 기계식 키보드, 씽크웨이 x VGN TV99 노스텔지어 그린 / 저소음 딥씨 프로', 139000, '블루투스 기계식 키보드 / 충전식키보드 / 키압:45G / Type-C 충전식(케이블포함) / C-Type 충전 / 매크로S/W / 멀티미디어 / 무한키입력', 'keyboard2.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[로지텍] 무선 미니키보드, K400 Plus 터치패드 ', 50150, '멀티미디어 / 터치패드 / 유니파잉수신', 'keyboard3.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[AULA] 유.무선.블루투스 기계식 키보드, F98 독거미 PBT RGB 풀윤활 영문자판 브라운핑크오렌지', 62800, '유선/무선/블루투스 기계식키보드 / Type-C 충전식(케이블포함) / 동시키입력 / 무한키입력 / 멀티미디어 / 매크로S/W / 윈도우잠금 / RGB LED 백라이트', 'keyboard4.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[COX] 유무선 무접점 미니키보드, CNK87BT PRO PBT, 8000Hz 래피드트리거', 189000, '키보드(일반) / 유선+무선 / 리시버+블루투스 / 5.2 / 내장 배터리 / 87키 / USB / 용도: 게이밍 / 무접점', 'keyboard5.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[AULA] 유,무선 블루투스 기계식 키보드, F87Pro 독거미', 59000, '유선/무선/블루투스 기계식키보드 / 키압:37G / Type-C 충전식(케이블포함) / 멀티미디어 / 무한키입력 / 동시키입력', 'keyboard6.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[LEOPOLD] 레오폴드 FC900RBT PD 화이트 투톤 한글', 149000, '유선/무선/블루투스 기계식 키보드 / 키압:45G / 기계식(저소음적축) / 체리 MX 스위치 / AAA건전지 교체형(배터리포함) / 멀티미디어', 'keyboard7.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[COX] 유선 기계식 키보드, CY104 게이트론, 갈축 [크림핑크/USB]', 55000, 'Gateron스위치 / 멀티미디어 / 동시키입력 / 무한키입력 / 윈도우잠금키 / 전체잠금키 / 단색 LED 백라이트 / LED 투영키캡 / 키캡리무버 / 플라스틱커버', 'keyboard8.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[HP] 유선 게이밍키보드, K110 [블랙/USB]', 12900, '멤브레인 / 동시키 입력 / 무한키 입력 / 멀티미디어 / 윈도우잠금키 / 다색 LED 백라이트 / 생활방수', 'keyboard9.jpg', 100, 'keyboard');
+insert Product(name, price, content, img, quantity, category) values ('[COX] 유선 기계식 키보드, CK01SL PBT 45GF 축교환, 저소음백축 [크림소다/USB] ', 66000, 'GTMX 축교환스위치 / 동시키입력 / 무한키입력 / 멀티미디어 / 윈도우잠금 / 전체잠금 / 키캡리무버 ', 'keyboard10.jpg', 100, 'keyboard');
+
+
+UPDATE product
+SET 
+  views = FLOOR(RAND() * 100) + 1,
+  likes = FLOOR(RAND() * 100) + 1,
+  quantity = 1000
+WHERE product_id BETWEEN 1 AND 40;
+
+
+INSERT INTO manager (manager_id, password)
+VALUES ('admin', '1234');
